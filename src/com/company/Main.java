@@ -17,7 +17,7 @@ public class Main {
                 Row row = new Row();
                 scanner.next();
                 String dirSetString = scanner.next();
-                row.directionSet = new HashSet<String>( Arrays.asList( dirSetString.split(",") ) );
+                row.directionSet = new HashSet<String>( Arrays.asList( dirSetString.split(",", -1) ) );
                 row.shift = Integer.parseInt(scanner.next());
                 row.dirNum = Integer.parseInt(scanner.next());
                 row.stack = Integer.parseInt(scanner.next());
