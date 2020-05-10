@@ -33,8 +33,8 @@ public class Main {
         List<String> ins = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(new File("./src/com/company/input.txt"));
-            while (scanner.hasNextLine()) {
-                ins.add(scanner.nextLine());
+            while (scanner.hasNext()) {
+                ins.add(scanner.next());
             }
         } catch (FileNotFoundException ex) {
             System.out.println(ex.getLocalizedMessage());

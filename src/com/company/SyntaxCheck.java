@@ -19,6 +19,8 @@ public class SyntaxCheck {
         while (true) {
             if (grammer.get(pointer).directionSet.contains(in.get(grammerPointer))) {
                 Row currentRow = grammer.get(pointer);
+                //System.out.println(currentRow);
+                System.out.println(grammer.get(pointer).shift);
 
                 if (currentRow.isEnd == 1) {
                     return "OK";
@@ -31,7 +33,7 @@ public class SyntaxCheck {
                     stack.push(pointer + 1);
                 }
 
-                if (currentRow.dirNum > 0) {
+                if (currentRow.dirNum == 0) {
                     pointer = stack.pop();
                 } else {
                     pointer = currentRow.dirNum;
