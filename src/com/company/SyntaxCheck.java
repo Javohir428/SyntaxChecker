@@ -6,7 +6,7 @@ import java.util.Stack;
 public class SyntaxCheck {
     List<Row> grammer;
     List<String> in;
-    Integer pointer = 0;
+    Integer pointer = 4;
     Integer grammerPointer = 0;
     Stack<Integer> stack = new Stack<>();
 
@@ -19,8 +19,6 @@ public class SyntaxCheck {
         while (true) {
             if (grammer.get(pointer).directionSet.contains(in.get(grammerPointer))) {
                 Row currentRow = grammer.get(pointer);
-                //System.out.println(currentRow);
-                System.out.println(grammer.get(pointer).shift);
 
                 if (currentRow.isEnd == 1) {
                     return "OK";

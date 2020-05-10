@@ -4,9 +4,9 @@ import java.util.HashSet;
 
 public class Row {
     public HashSet<String> directionSet = new HashSet<>();
-    public Integer shift = -1;
-    public Integer dirNum = 0;
-    public Integer stack = -1;
-    public Integer errorTransition = -1;
-    public Integer isEnd = -1;
+    public Integer shift;
+    public Integer dirNum;
+    public Integer stack;
+    public Integer errorTransition;
+    public Integer isEnd;
 }
