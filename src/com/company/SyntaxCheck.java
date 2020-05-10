@@ -6,7 +6,7 @@ import java.util.Stack;
 public class SyntaxCheck {
     List<Row> grammer;
     List<String> in;
-    Integer pointer = 4;
+    Integer pointer = 0;
     Integer grammerPointer = 0;
     Stack<Integer> stack = new Stack<>();
 
