@@ -27,7 +27,7 @@ public class SyntaxCheck {
 
     private boolean CheckRow()
     {
-        return grammer.get(_currentTableIndex).directionSet.contains(_currLexem) && grammer.get(_currentTableIndex).directionSet.size() == 0;
+        return grammer.get(_currentTableIndex).directionSet.contains(_currLexem) || grammer.get(_currentTableIndex).directionSet.size() == 0;
     }
 
     private boolean CheckWords()
@@ -36,15 +36,17 @@ public class SyntaxCheck {
         {
             ShiftIfEnabled();
             PushToStackIfEnabled();
+
+            if (grammer.get(_currentTableIndex).dirNum != 0 )  // переходим по dirNum
+            {
+                _currentTableIndex = grammer.get(_currentTableIndex).dirNum;
+                return CheckWords();
+            }
+
             if ( grammer.get(_currentTableIndex).dirNum == 0 && stackIndex.size() > 0 )  // переходим по стеку, если нельзя по dirNum
             {
                 _currentTableIndex = stackIndex.lastElement();
                 stackIndex.remove(stackIndex.size() - 1);
-                return CheckWords();
-            }
-            if (grammer.get(_currentTableIndex).dirNum != 0 )  // переходим по dirNum
-            {
-                _currentTableIndex = grammer.get(_currentTableIndex).dirNum;
                 return CheckWords();
             }
 
@@ -71,10 +73,10 @@ public class SyntaxCheck {
         _currentWordIndex++;
         if (_currentWordIndex > in.size() - 1)
         {
-            System.out.println(_currentWordIndex);
             _currLexem = null;
             return;
         }
+
         _currLexem = in.get(_currentWordIndex);
     }
 
@@ -82,7 +84,6 @@ public class SyntaxCheck {
     {
         if (grammer.get(_currentTableIndex).stack == -1)
         {
-            System.out.println(grammer.get(_currentTableIndex).stack);
             return;
         }
         stackIndex.push( _currentTableIndex + 1 );
