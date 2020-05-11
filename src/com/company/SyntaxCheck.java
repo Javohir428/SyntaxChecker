@@ -27,7 +27,7 @@ public class SyntaxCheck {
 
     private boolean CheckRow()
     {
-        return grammer.get(_currentTableIndex).directionSet.contains(_currLexem) || grammer.get(_currentTableIndex).directionSet.size() == 0;
+        return grammer.get(_currentTableIndex).directionSet.contains(_currLexem) || (_currLexem.equals("#") && grammer.get(_currentTableIndex).directionSet.size() == 0 );
     }
 
     private boolean CheckWords()
@@ -56,7 +56,6 @@ public class SyntaxCheck {
                 return CheckWords();
             }
             return stackIndex.size() == 0 && grammer.get(_currentTableIndex).isEnd == 1;
-
         }
 
         return false;

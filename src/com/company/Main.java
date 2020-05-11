@@ -36,6 +36,7 @@ public class Main {
             while (scanner.hasNext()) {
                 ins.add(scanner.next());
             }
+            ins.add("#");
         } catch (FileNotFoundException ex) {
             System.out.println(ex.getLocalizedMessage());
         }
