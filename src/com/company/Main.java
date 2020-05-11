@@ -39,7 +39,13 @@ public class Main {
         } catch (FileNotFoundException ex) {
             System.out.println(ex.getLocalizedMessage());
         }
+
         SyntaxCheck syntaxCheck = new SyntaxCheck(rows, ins);
-        System.out.println(syntaxCheck.run());
+        if (syntaxCheck.Run())
+        {
+            System.out.println("OK");
+        } else {
+            System.out.println("ERROR");
+        }
     }
 }
