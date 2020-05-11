@@ -9,7 +9,7 @@ public class SyntaxCheck {
     String _currLexem;
     Integer _currentTableIndex;
     Integer _currentWordIndex;
-    Stack<Integer> stack = new Stack<Integer>();
+    Stack<Integer> stackIndex = new Stack<>();
 
 
     public SyntaxCheck(List<Row> grammer, List<String> in) {
@@ -36,10 +36,10 @@ public class SyntaxCheck {
         {
             ShiftIfEnabled();
             PushToStackIfEnabled();
-            if ( grammer.get(_currentTableIndex).dirNum == 0 && stack.size() > 0 )  // переходим по стеку, если нельзя по dirNum
+            if ( grammer.get(_currentTableIndex).dirNum == 0 && stackIndex.size() > 0 )  // переходим по стеку, если нельзя по dirNum
             {
-                _currentTableIndex = stack.lastElement();
-                stack.remove(stack.size() - 1);
+                _currentTableIndex = stackIndex.lastElement();
+                stackIndex.remove(stackIndex.size() - 1);
                 return CheckWords();
             }
             if (grammer.get(_currentTableIndex).dirNum != 0 )  // переходим по dirNum
@@ -47,13 +47,16 @@ public class SyntaxCheck {
                 _currentTableIndex = grammer.get(_currentTableIndex).dirNum;
                 return CheckWords();
             }
-            return stack.size() == 0 && grammer.get(_currentTableIndex).isEnd == 1;
+
+            if (grammer.get(_currentTableIndex).errorTransition != -1 )  // переходим по Error, если возможно и нельзя обработать строку
+            {
+                _currentTableIndex = grammer.get(_currentTableIndex).errorTransition;
+                return CheckWords();
+            }
+            return stackIndex.size() == 0 && grammer.get(_currentTableIndex).isEnd == 1;
+
         }
-        if (grammer.get(_currentTableIndex).errorTransition != -1 )  // переходим по Error, если возможно и нельзя обработать строку
-        {
-            _currentTableIndex = grammer.get(_currentTableIndex).errorTransition;
-            return CheckWords();
-        }
+
         return false;
     }
 
@@ -79,8 +82,9 @@ public class SyntaxCheck {
     {
         if (grammer.get(_currentTableIndex).stack == -1)
         {
+            System.out.println(grammer.get(_currentTableIndex).stack);
             return;
         }
-        stack.push( _currentTableIndex + 1 );
+        stackIndex.push( _currentTableIndex + 1 );
     }
 }
