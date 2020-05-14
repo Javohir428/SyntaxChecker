@@ -35,8 +35,8 @@ public class SyntaxCheck {
         while (true) {
             if (CheckRow())  // проверяем можно ли обрабатывать строку в таблице
             {
-                ShiftIfEnabled();
-                PushToStackIfEnabled();
+                isShift();
+                isStack();
 
                 if (grammer.get(_currentTableIndex).dirNum != 0)  // переходим по dirNum
                 {
@@ -53,7 +53,7 @@ public class SyntaxCheck {
                     return "OK";
                 }
 
-            } else if (grammer.get(_currentTableIndex).isEnd == -1)
+            } else if (grammer.get(_currentTableIndex).error != -1)
             {
                 _currentTableIndex++;
             } else {
@@ -62,7 +62,7 @@ public class SyntaxCheck {
         }
     }
 
-    private void ShiftIfEnabled()
+    private void isShift()
     {
         if (grammer.get(_currentTableIndex).shift == -1)
         {
@@ -79,7 +79,7 @@ public class SyntaxCheck {
         _currLexem = in.get(_currentWordIndex);
     }
 
-    private void PushToStackIfEnabled()
+    private void isStack()
     {
         if (grammer.get(_currentTableIndex).stack == -1)
         {

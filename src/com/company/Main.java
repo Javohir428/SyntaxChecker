@@ -21,7 +21,7 @@ public class Main {
                 row.shift = Integer.parseInt(scanner.next());
                 row.dirNum = Integer.parseInt(scanner.next());
                 row.stack = Integer.parseInt(scanner.next());
-                row.errorTransition = Integer.parseInt(scanner.next());
+                row.error = Integer.parseInt(scanner.next());
                 row.isEnd = Integer.parseInt(scanner.next());
                 rows.add(row);
             }

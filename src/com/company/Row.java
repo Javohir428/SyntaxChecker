@@ -7,6 +7,6 @@ public class Row {
     public Integer shift;
     public Integer dirNum;
     public Integer stack;
-    public Integer errorTransition;
+    public Integer error;
     public Integer isEnd;
 }
