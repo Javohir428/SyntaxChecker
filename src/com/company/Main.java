@@ -42,11 +42,6 @@ public class Main {
         }
 
         SyntaxCheck syntaxCheck = new SyntaxCheck(rows, ins);
-        if (syntaxCheck.Run())
-        {
-            System.out.println("OK");
-        } else {
-            System.out.println("ERROR");
-        }
+        System.out.println(syntaxCheck.Run());
     }
 }

@@ -17,7 +17,7 @@ public class SyntaxCheck {
         this.in = in;
     }
 
-    public boolean Run()
+    public String Run()
     {
         _currentTableIndex = 0;
         _currentWordIndex = 0;
@@ -27,40 +27,40 @@ public class SyntaxCheck {
 
     private boolean CheckRow()
     {
-        return grammer.get(_currentTableIndex).directionSet.contains(_currLexem) || (_currLexem.equals("#") && grammer.get(_currentTableIndex).directionSet.size() == 0 );
+        return grammer.get(_currentTableIndex).directionSet.contains(_currLexem);
     }
 
-    private boolean CheckWords()
+    private String CheckWords()
     {
-        if (CheckRow())  // проверяем можно ли обрабатывать строку в таблице
-        {
-            ShiftIfEnabled();
-            PushToStackIfEnabled();
-
-            if (grammer.get(_currentTableIndex).dirNum != 0 )  // переходим по dirNum
+        while (true) {
+            if (CheckRow())  // проверяем можно ли обрабатывать строку в таблице
             {
-                _currentTableIndex = grammer.get(_currentTableIndex).dirNum;
-                return CheckWords();
-            }
+                ShiftIfEnabled();
+                PushToStackIfEnabled();
 
-            if ( grammer.get(_currentTableIndex).dirNum == 0 && stackIndex.size() > 0 )  // переходим по стеку, если нельзя по dirNum
-            {
-                _currentTableIndex = stackIndex.lastElement();
-                stackIndex.remove(stackIndex.size() - 1);
-                return CheckWords();
-            }
+                if (grammer.get(_currentTableIndex).dirNum != 0)  // переходим по dirNum
+                {
+                    _currentTableIndex = grammer.get(_currentTableIndex).dirNum;
+                }
 
-            if (grammer.get(_currentTableIndex).errorTransition != -1 )  // переходим по Error, если возможно и нельзя обработать строку
+                if (grammer.get(_currentTableIndex).dirNum == 0 && stackIndex.size() > 0)  // переходим по стеку, если нельзя по dirNum
+                {
+                    _currentTableIndex = stackIndex.lastElement();
+                    stackIndex.remove(stackIndex.size() - 1);
+                }
+                if (stackIndex.size() == 0 && grammer.get(_currentTableIndex).isEnd == 1)
+                {
+                    return "OK";
+                }
+
+            } else if (grammer.get(_currentTableIndex).isEnd == -1)
             {
-                _currentTableIndex = grammer.get(_currentTableIndex).errorTransition;
-                return CheckWords();
+                _currentTableIndex++;
+            } else {
+                return "ERROR";
             }
-            return stackIndex.size() == 0 && grammer.get(_currentTableIndex).isEnd == 1;
         }
-
-        return false;
     }
-
 
     private void ShiftIfEnabled()
     {
