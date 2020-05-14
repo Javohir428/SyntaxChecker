@@ -40,7 +40,7 @@ public class SyntaxCheck {
 
                 if (grammer.get(_currentTableIndex).dirNum != 0)  // переходим по dirNum
                 {
-                    _currentTableIndex = grammer.get(_currentTableIndex).dirNum;
+                    _currentTableIndex = grammer.get(_currentTableIndex).dirNum - 1;
                 }
 
                 if (grammer.get(_currentTableIndex).dirNum == 0 && stackIndex.size() > 0)  // переходим по стеку, если нельзя по dirNum
