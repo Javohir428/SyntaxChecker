@@ -15,7 +15,7 @@ public class Main {
             scanner.nextLine();
             while (scanner.hasNextLine()) {
                 Row row = new Row();
-                scanner.next();
+                row.number = Integer.parseInt(scanner.next());
                 String dirSetString = scanner.next();
                 row.directionSet = new HashSet<String>( Arrays.asList( dirSetString.split(",", -1) ) );
                 row.shift = Integer.parseInt(scanner.next());

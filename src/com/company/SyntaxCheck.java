@@ -54,6 +54,9 @@ public class SyntaxCheck {
                 {
                     _currentTableIndex++;
                 } else {
+                System.out.println("Ошибка в строке " + grammer.get(_currentTableIndex).number);
+                System.out.println("Ожидалось: " + _currLexem);
+                System.out.println("Встретился: " + grammer.get(_currentTableIndex).directionSet);
                 return "ERROR";
             }
         }
